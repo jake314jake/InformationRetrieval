@@ -13,9 +13,10 @@ public class binTokenReader extends fileReader {
 		super(path);
 		tokens=new ArrayList<>();
 	}
-	
-	public void loadTokensFromBin() {
-		try (DataInputStream dis = new DataInputStream(super.fis)) {
+	//--------------------------------------------------------------
+	@Override
+	public void read() {
+try (DataInputStream dis = new DataInputStream(super.fis)) {
 			
 			while(dis.available()>0) {
 				tokens.add(new token(dis.readInt(),dis.readUTF()));
@@ -27,9 +28,11 @@ public class binTokenReader extends fileReader {
 		    e.printStackTrace();
 		}
 		
-		
 	}
-	//
+
+	
+	//----------------------------------------------------------------
+	// get token by its id
 	public token getTokenByID(int id) {
 		for(token tk:tokens) {
 			if (tk.tokenID()==id)
@@ -39,6 +42,19 @@ public class binTokenReader extends fileReader {
 		return new token(0,"");
 			
 	}
+	
+	// get token by its value
+	public token getTokenByVALUE(String value) {
+		for(token tk:tokens) {
+			
+			if (value.equals(tk.tokenVALUE()))
+				return tk;
+			
+		}
+		// if not exist  (empty token)
+		return new token(0,"");
+		}
+	
 	// get the max id value 
 	int getTokenMaxID() {
 		int maxID=0;
@@ -48,4 +64,6 @@ public class binTokenReader extends fileReader {
 		}
 		return maxID;
 	}
+	
+	
 }
