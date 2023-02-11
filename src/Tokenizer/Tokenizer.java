@@ -25,6 +25,8 @@ public abstract class Tokenizer  {
     public List<token> getTokens(){
 	   return tokens;
    }
+    public static String normlize(String str) {
+    	return str.toLowerCase();
+    }
  
   }
-

@@ -10,7 +10,7 @@ import java.util.StringTokenizer;
 import Records.token;
 
 public class txtFileTokenizer extends Tokenizer  {
-     private final String delimiterList=" ,.?!'\";-[]_()+*–";
+     private final String delimiterList=" ,.?!'\";-[]_()+*ï¿½";
      public txtFileTokenizer() {
     	 super();
      }
@@ -26,7 +26,7 @@ public class txtFileTokenizer extends Tokenizer  {
 				st = new StringTokenizer(line,delimiterList);
 				while(st.hasMoreTokens()) {
 					// add the record ( tokenPOSITION-tokenVALUE )
-					super.tokens.add(new token(tokenCount,st.nextToken()));
+					super.tokens.add(new token(tokenCount,normlize(st.nextToken())));
 					// update the count
 					tokenCount++;
 				}
